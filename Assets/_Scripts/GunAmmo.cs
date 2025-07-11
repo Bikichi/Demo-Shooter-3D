@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class GunAmmo : MonoBehaviour
 {
     public int magSize;
-    public GrenadeLaucher gun;
+    //public GrenadeLaucher gun;
     public AudioSource reloadSounds;
     public UnityEvent loadedAmmoChanged;
 

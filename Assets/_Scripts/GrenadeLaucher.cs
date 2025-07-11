@@ -1,31 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class GrenadeLaucher : MonoBehaviour
+public class GrenadeLauncher : MonoBehaviour
 {
     private const int LeftMouseButton = 0;
     public GameObject bulletPrefab;
-    public Transform firePos;
+    public Transform firingPos;
     public float bulletSpeed;
     public AudioSource shootingSound;
+    public Animator anim;
 
-    public AutoShooting autoShooting;
-
-
-    private void Update()
+    void Update()
     {
-        if(Input.GetMouseButtonDown(LeftMouseButton))
+        if (Input.GetMouseButtonDown(LeftMouseButton))
         {
             ShootBullet();
-        }        
+        }
     }
-    public void ShootBullet()
+
+    private void ShootBullet() => anim.SetTrigger("Shoot");
+
+    private void PlayFireSound() => shootingSound.Play();
+
+    public void AddProjectile()
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePos.position, firePos.rotation);
-
-        bullet.GetComponent<Rigidbody>().velocity -= firePos.forward * bulletSpeed;
-
-        shootingSound.Play();
-        
-        Destroy(bullet, 1.2f);
+        GameObject bullet = Instantiate(bulletPrefab, firingPos.position, firingPos.rotation);
+        bullet.GetComponent<Rigidbody>().velocity = firingPos.forward * bulletSpeed;
     }
 }

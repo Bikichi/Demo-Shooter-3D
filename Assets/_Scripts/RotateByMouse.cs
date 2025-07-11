@@ -1,41 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RotateByMouse : MonoBehaviour
 {
-    public float angleOverDistance;
-    public Transform cameraHolder;
-    public float minPitch;
-    public float maxPitch;
+    public float angleOverDistance = 2f;
+    public Transform cameraHolder; // Empty object chứa Camera
+    public float minPitch = -80f;
+    public float maxPitch = 80f;
 
-    private float pitch;
-
+    private float pitch = 0f;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.visible = false;
     }
 
     private void Update()
     {
         UpdateYaw();
-        UpdatePitch();  
+        UpdatePitch();
     }
-    public void UpdateYaw()
+
+    private void UpdateYaw()
     {
         float mouseX = Input.GetAxis("Mouse X");
-        float deltaYaw = mouseX * angleOverDistance;    
-
-        transform.Rotate(0, deltaYaw, 0);
+        float yaw = mouseX * angleOverDistance;
+        transform.Rotate(0, yaw, 0); 
     }
 
-    public void UpdatePitch()
+    private void UpdatePitch()
     {
         float mouseY = Input.GetAxis("Mouse Y");
         float deltaPitch = -mouseY * angleOverDistance;
         pitch = Mathf.Clamp(pitch + deltaPitch, minPitch, maxPitch);
-        cameraHolder.localEulerAngles = new Vector3(pitch, 0, 0);
+
+        cameraHolder.localEulerAngles = new Vector3(pitch, 0, 0); 
     }
 }
