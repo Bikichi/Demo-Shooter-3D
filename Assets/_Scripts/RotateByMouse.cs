@@ -22,6 +22,7 @@ public class RotateByMouse : MonoBehaviour
     }
 
     private void UpdateYaw()
+        //quay ngang
     {
         float mouseX = Input.GetAxis("Mouse X");
         float yaw = mouseX * angleOverDistance;
@@ -29,6 +30,7 @@ public class RotateByMouse : MonoBehaviour
     }
 
     private void UpdatePitch()
+        //quay dọc lên xuống
     {
         float mouseY = Input.GetAxis("Mouse Y");
         float deltaPitch = -mouseY * angleOverDistance;
